@@ -95,7 +95,7 @@ public class Lambda01 {
 
 
     public static void printEtFunctional2(List<Integer> sayi) {
-        sayi.stream().forEach(Lambda01::yazdir); //method referance --> System.out yapisinda print methodu cagir
+        sayi.stream().forEach(Lambda01::yazdir);
     }
 
     //structured Programming ile list elemanlarinin  cift olanalrini ayni satirda aralarina bosluk birakarak print ediniz
