@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Lambda02 {
     public static void main(String[] args) {
@@ -19,6 +16,14 @@ public class Lambda02 {
         elemanTopla(sayi);
         System.out.println("\n*********************");
         ciftCarpim(sayi);
+        System.out.println("\n*********************");
+        minBul(sayi);
+        System.out.println("\n*********************");
+        bestenBüyükenKücükTek(sayi);
+        System.out.println("\n*********************");
+        ciftElemanKücüktenBüyüge(sayi);
+        System.out.println("\n*********************");
+        tekKareBkPrint(sayi);
     }
 
     // Task : Functional Programming ile listin cift elemanlarinin  karelerini ayni satirda aralarina bosluk bırakarak print ediniz
@@ -86,4 +91,50 @@ public class Lambda02 {
         System.out.println(sayi.stream().filter(Lambda01::ciftBul).reduce(Math::multiplyExact));
     }
 
+    // Task : List'teki elemanlardan en kucugunu 4 farklı yontem ile print ediniz.
+    public static void minBul(List<Integer> sayi) {
+        //1. yontem Method Reference --> Integer class
+        Optional<Integer> minSayiInteger = sayi.stream().reduce(Integer::min);
+        System.out.println("Min sayi integer : " + minSayiInteger);
+        //2. yontem Method Reference --> Math class
+        Optional<Integer> minSayiMath = sayi.stream().reduce(Math::min);
+        System.out.println("Min sayi Math : " + minSayiMath);
+        //3. yontem Lambda Expression
+        int minSayiLambda = (sayi.stream().reduce(Integer.MAX_VALUE, (x, y) -> x < y ? x : y));
+        System.out.println("Min sayi lambda : " + minSayiLambda);
+        //4. yontem Method Reference --> Haluk class
+        Optional<Integer> minSayiHaluk = sayi.stream().reduce(Lambda02::byHalukMin);
+        System.out.println("Min sayi Haluk : " + minSayiHaluk);
+    }
+
+    public static int byHalukMin(int a, int b) {
+        return a < b ? a : b;  //bu method kendisine verilen iki int degerin en kücügünü return eder
+    }
+
+    // Task : List'teki 5'ten buyuk en kucuk tek sayiyi print ediniz.
+    public static void bestenBüyükenKücükTek(List<Integer> sayi) {
+        System.out.println(sayi.stream().filter(t -> t > 5 && t % 2 != 0).reduce(Lambda02::byHalukMin));
+    }
+
+    // Task : list'in cift  elemanlarinin karelerini  kucukten buyuge print ediniz.
+    public static void ciftElemanKücüktenBüyüge(List<Integer> sayi) {
+        sayi.stream().filter(Lambda01::ciftBul).map(t -> t * t).sorted().forEach(Lambda01::yazdir);
+        //sorted() => Doğal düzene göre sıralanmış, bu akışın elemanlarında oluşan bir akış döndürür.
+        //Sorted() methodu tekrarlı kullanılırsa en son kullanılan aktif olur.
+
+        /*
+        sorted() --> ici bos olursa default siralar
+        sorted(Comperator.reverseOrder()) --> girilen veriye/methoda göre siralar
+         */
+
+    }
+    // Task : list'in tek  elemanlarinin kareleri ni buykten kucuge  print ediniz.
+    public static void tekKareBkPrint(List<Integer> sayi) {
+        sayi.//akıs kaynagı
+                stream().//akısa alındı
+                filter(t -> t % 2 != 0).//tek elemnlar fitrlenedi
+                map(t -> t * t).//fitrelenen cift sayı karesi alındı
+                sorted(Comparator.reverseOrder()).//karesi alınan elemanlar ters(b->k) sıralandı
+                forEach(Lambda01::yazdir);//print edildi
+    }
 }
