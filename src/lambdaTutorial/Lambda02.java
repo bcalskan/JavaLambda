@@ -1,3 +1,5 @@
+package lambdaTutorial;
+
 import java.util.*;
 
 public class Lambda02 {
