@@ -55,9 +55,7 @@ public class Lambda05 {
     //TASK 02 --> 1'den x'e kadar cift tamsayilari toplayan bir program create ediniz.
     public static int ciftTopla(int x) {
         return IntStream.rangeClosed(1, x).filter(Lambda01::ciftBul).sum();
-
     }
-
 
     //TASK 03 --> Ilk x pozitif cift sayiyi toplayan program  create ediniz.
     public static int ilkXCiftSayi(int x) {
