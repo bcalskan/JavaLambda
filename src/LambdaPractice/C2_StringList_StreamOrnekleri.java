@@ -30,7 +30,11 @@ public class C2_StringList_StreamOrnekleri {
         System.out.println("\n----------------\n");
         System.out.println(eIleYeniListe(list));
         System.out.println("\n----------------\n");
-
+        ilkÜcHarfTekrarYazdir(list);
+        System.out.println("\n----------------\n");
+        ilkHarfBüyükGerisiKücük(list);
+        System.out.println("\n----------------\n");
+        uzunlugGöreListe(list);
         System.out.println("\n----------------\n");
 
 
@@ -68,12 +72,23 @@ public class C2_StringList_StreamOrnekleri {
 
 
     // S6 : ilk harfini 3 kere tekrar edip yazalim ornek jjjava gibi
+    public static void ilkÜcHarfTekrarYazdir(List<String> list) {
+        list.stream().map(t -> t.substring(0, 1).toUpperCase() +
+                t.substring(0, 1).toLowerCase() + t.substring(1)).forEach(t -> System.out.println(t + " "));
+    }
 
 
     // S7: tum elemanlarin ilk harfini buyuk digerlerini kucuk yaziniz
+    public static void ilkHarfBüyükGerisiKücük(List<String> list) {
+        list.stream().map(t -> t.substring(0, 1).toUpperCase() + t.substring(1).toLowerCase()).forEach(t -> System.out.println(t + " "));
+    }
 
 
     // S8: uzunlugu 4 ve 6 olanlar haric bir liste olusturunuz
+    public static void uzunlugGöreListe(List<String> list) {
+        System.out.println(list.stream().filter(t -> t.length() != 4 && t.length() != 6).collect(Collectors.toList()));
+
+    }
 
 
 }
